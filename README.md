@@ -23,10 +23,10 @@ JSON Body:
    }
    
 For Deleting a Todo Item:
-Delete Method on localhost:8000/<name>
+Delete Method on localhost:8000/{name}
 
 For Updating a Todo Item:
-Put method on localhost:8000/<id>
+Put method on localhost:8000/{id}
 JSON Body:
   {
    "name":"Shop",
