@@ -37,10 +37,10 @@ JSON Body:
 #Docker
 Dockerfile is already present
 - Execute the command:
-docker build -t <name> .
+docker build -t {name} .
 
 - To run the container maker use of:
-docker run -p 5000:5000 <name>
+docker run -p 5000:5000 {name}
    
    
    
