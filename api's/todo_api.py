@@ -59,5 +59,5 @@ api.add_resource(ToDoList,"/")
 api.add_resource(ToDo,"/<string:name>")
 api.add_resource(TodoPut,"/<int:id>")
 
-app.run(port=8000)
+app.run(host="0.0.0.0",port=5000)
 
