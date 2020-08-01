@@ -1,6 +1,8 @@
 # ToDo
 A Todo Application for Task Management
 
+MongoDB:
+    Port configured for MongoDB is 27017
 
 1.Run the Application.
 
@@ -16,7 +18,6 @@ For Creating a Todo Item:
 Post Method on 0.0.0.0:5000/
 JSON Body:
    {
-   "id":2,
    "name":"Shop",
    "task":"Groceries for whole week",
    "duedate":"27/08/2020"
