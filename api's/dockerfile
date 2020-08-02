@@ -1,5 +1,6 @@
 FROM python:3.7
-RUN pip install flask_restful && pip install flask && pip install datetime
+RUN pip install flask_restful && pip install flask && pip install datetime 
+RUN pip3 install pymongo
 ADD todo_api.py /
 EXPOSE 5000
 CMD ["python","todo_api.py"]

@@ -3,8 +3,8 @@ from datetime import date
 from flask import Flask, request
 from flask_restful import Api, Resource
 from pymongo import MongoClient
-
-client = MongoClient(port=27017)
+#specify what you are giving in the docker compose.since i have mentioned DB in the compose my connection string is this
+client = MongoClient('mongodb://db:27017')
 app = Flask(__name__)
 api = Api(app)
 

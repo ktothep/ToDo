@@ -1,0 +1,16 @@
+version: '3.0'
+services:
+  todoapi:
+    build: .
+    ports:
+       - "5000:5000"
+    links:
+           - db
+  db:
+    image: mongo
+    volumes:
+        - /Users/karanprinja/documents/mongodb/data:/mongodb
+    ports:
+      - "27017:27017"
+     
+      
