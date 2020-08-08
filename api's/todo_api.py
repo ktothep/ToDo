@@ -4,7 +4,7 @@ from flask import Flask, request
 from flask_restful import Api, Resource
 from pymongo import MongoClient
 #specify what you are giving in the docker compose.since i have mentioned DB in the compose my connection string is this
-client = MongoClient('mongodb://db:27017')
+client = MongoClient('mongodb://0.0.0.0:27017')
 app = Flask(__name__)
 api = Api(app)
 
