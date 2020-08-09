@@ -2,3 +2,4 @@ flask_restful
 flask
 datetime
 pymongo
+configparser

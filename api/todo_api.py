@@ -1,10 +1,17 @@
+import configparser
 from datetime import date
 
-from flask import Flask, request,escape
+from flask import Flask, request, escape
 from flask_restful import Api, Resource
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://localhost:27017')
+parser = configparser.ConfigParser()
+parser.read('configuration.ini')
+mongo_config = parser['Database']['mongodb']
+api_host = parser['api']['api_host']
+api_port = parser['api']['port']
+
+client = MongoClient(mongo_config)
 app = Flask(__name__)
 api = Api(app)
 
@@ -71,7 +78,6 @@ class ToDoList(Resource):
     This class is for api request without path parameters.
     It caters to get and post request 
     """
-
     @staticmethod
     def get():
         """
@@ -113,4 +119,4 @@ class ToDoList(Resource):
 api.add_resource(ToDoList, "/")
 api.add_resource(ToDo, "/<string:name>")
 
-app.run(host="0.0.0.0", port=5000)
+app.run(host=api_host, port=api_port)
