@@ -17,7 +17,6 @@ api = Api(app)
 
 db = client.apidb
 
-
 class ToDo(Resource):
     """
     This class is for api request with path parameters.
