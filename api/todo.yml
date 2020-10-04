@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo
+spec:
+ replicas: 2
+ selector:
+    matchLabels:
+      app: todo 
+ template: 
+   metadata:
+     labels:
+       app: todo
+   spec:
+     containers:
+       -
+        image: "ktothep/version6"
+        name: todo
+        ports:
+          -
+            containerPort: 5000
+---
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: todoapi
+spec: 
+  ports: 
+    - port: 5000 
+      nodePort: 30029 
+  selector: 
+      app: todo
+  type: NodePort
+
+
+        
+          
+      
+  

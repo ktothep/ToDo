@@ -1,5 +1,7 @@
 import configparser
 from datetime import date
+from datetime import datetime
+
 
 from flask import Flask, request, escape
 from flask_restful import Api, Resource
@@ -7,7 +9,8 @@ from pymongo import MongoClient
 
 parser = configparser.ConfigParser()
 parser.read('configuration.ini')
-mongo_config = parser['Database']['mongodb']
+database=parser['Database']['mongodb']
+mongo_config = database.encode('ascii', 'ignore')
 api_host = parser['api']['api_host']
 api_port = parser['api']['port']
 
@@ -102,17 +105,26 @@ class ToDoList(Resource):
         """
         data = request.get_json()
         name = data['name']
+        if (name==""):
+            return "Please enter a name"
         task = data['task']
+        if (task==""):
+            return "Please enter a name"
         due_date = data['duedate']
-        created_date = date.today().__str__()
-        for value in db.todotable.find({"task": task}):
-            if value.get("_id"):
-                return "Task: {task} is already present in your ToDo list".format(task=task), 200
-        db.todotable.insert_one({"name": name,
-                                 "task": task,
-                                 "due_date": due_date,
-                                 "created_date": created_date})
-        return "Task: {task} has been created in your ToDo list".format(task=task), 201
+        try:
+         if datetime.strptime(due_date, "%d/%m/%Y").strftime('%d/%m/%Y'):
+             created_date = date.today().__str__()
+             for value in db.todotable.find({"task": task}):
+                 if value.get("name"):
+                     return "Task: {task} is already present in your ToDo list".format(task=task), 200
+             db.todotable.insert_one({"name": name,
+                                      "task": task,
+                                      "due_date": due_date,
+                                      "created_date": created_date})
+             return "Task: {task} has been created in your ToDo list".format(task=task), 201
+        except ValueError:
+            return "Enter Date in correct format"
+
 
 
 api.add_resource(ToDoList, "/")
